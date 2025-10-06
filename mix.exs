@@ -41,6 +41,7 @@ defmodule CoffeeAddicts.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
+      {:tesla, "~> 1.13"},
       # --- Dev-only ---
       {:mix_test_interactive, "~> 5.0", only: :dev, runtime: false},
       {:dialyxir, "~> 1.4", only: :dev, runtime: false},
