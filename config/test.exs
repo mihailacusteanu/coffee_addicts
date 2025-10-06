@@ -7,6 +7,9 @@ config :coffee_addicts, CoffeeAddictsWeb.Endpoint,
   secret_key_base: "P67OyTkpr3xotE0F5bhlgPXeOL1Vqa4qWvzKK+9Xg8elahq/0XGN4f33zQpz7wV7",
   server: false
 
+config :coffee_addicts,
+  start_shop_cache: false
+
 # In test we don't send emails
 config :coffee_addicts, CoffeeAddicts.Mailer, adapter: Swoosh.Adapters.Test
 

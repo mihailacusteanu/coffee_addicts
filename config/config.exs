@@ -8,7 +8,8 @@
 import Config
 
 config :coffee_addicts,
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime],
+  csv_url: "https://static.reasig.ro/interview/coffee_shops_exerceise/coffee_shops.csv"
 
 # Configures the endpoint
 config :coffee_addicts, CoffeeAddictsWeb.Endpoint,

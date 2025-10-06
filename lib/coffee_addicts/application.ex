@@ -7,17 +7,24 @@ defmodule CoffeeAddicts.Application do
 
   @impl true
   def start(_type, _args) do
-    children = [
+    csv_url = Application.get_env(:coffee_addicts, :csv_url)
+    start_shop_cache = Application.get_env(:coffee_addicts, :start_shop_cache, true)
+
+    base_children = [
       CoffeeAddictsWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:coffee_addicts, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: CoffeeAddicts.PubSub},
-      # Start the Finch HTTP client for sending emails
-      {Finch, name: CoffeeAddicts.Finch},
-      # Start a worker by calling: CoffeeAddicts.Worker.start_link(arg)
-      # {CoffeeAddicts.Worker, arg},
-      # Start to serve requests, typically the last entry
-      CoffeeAddictsWeb.Endpoint
+      {Finch, name: CoffeeAddicts.Finch}
     ]
+
+    shop_cache_child =
+      if start_shop_cache do
+        [{CoffeeAddicts.ShopCache, csv_url: csv_url}]
+      else
+        []
+      end
+
+    children = base_children ++ shop_cache_child ++ [CoffeeAddictsWeb.Endpoint]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

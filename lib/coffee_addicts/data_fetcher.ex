@@ -22,6 +22,7 @@ defmodule CoffeeAddicts.DataFetcher do
       iex> DataFetcher.fetch_csv("https://example.com/data.csv", http_client: mock_client)
       {:ok, "name,email\\nJohn,john@example.com"}
   """
+  @spec fetch_csv(String.t(), keyword()) :: {:ok, String.t()} | {:error, {atom(), String.t()}}
   def fetch_csv(url, opts \\ []) do
     http_client = Keyword.get(opts, :http_client, &__MODULE__.default_client/3)
 
@@ -42,9 +43,10 @@ defmodule CoffeeAddicts.DataFetcher do
 
   @doc false
   def default_client(method, url, _opts) do
-    client = Tesla.client([
-      Tesla.Middleware.FollowRedirects
-    ])
+    client =
+      Tesla.client([
+        Tesla.Middleware.FollowRedirects
+      ])
 
     case method do
       :get -> Tesla.get(client, url)
