@@ -40,7 +40,9 @@ config :coffee_addicts, CoffeeAddictsWeb.Endpoint,
 # different ports.
 
 # Enable dev routes for dashboard and mailbox
-config :coffee_addicts, dev_routes: true
+config :coffee_addicts,
+  dev_routes: true,
+  start_shop_cache: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
