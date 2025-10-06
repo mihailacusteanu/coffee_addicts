@@ -7,6 +7,8 @@ defmodule CoffeeAddictsWeb.Router do
 
   scope "/api", CoffeeAddictsWeb do
     pipe_through :api
+
+    get "/coffee-shops/nearest", CoffeeShopController, :nearest
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

@@ -24,7 +24,8 @@ defmodule CoffeeAddicts.DataFetcherTest do
           {:error, :timeout}
       end
 
-      assert {:error, {:data_fetcher_timeout, "Request timed out"}} = DataFetcher.fetch_csv(url, http_client: mock_client)
+      assert {:error, {:data_fetcher_timeout, "Request timed out"}} =
+               DataFetcher.fetch_csv(url, http_client: mock_client)
     end
 
     test "returns error when server responds with non-200 status" do
@@ -35,7 +36,8 @@ defmodule CoffeeAddicts.DataFetcherTest do
           {:ok, %Tesla.Env{status: 404, body: "Not Found"}}
       end
 
-      assert {:error, {:data_fetcher_http_error, "You received a 404 code from API"}} = DataFetcher.fetch_csv(url, http_client: mock_client)
+      assert {:error, {:data_fetcher_http_error, "You received a 404 code from API"}} =
+               DataFetcher.fetch_csv(url, http_client: mock_client)
     end
   end
 end
